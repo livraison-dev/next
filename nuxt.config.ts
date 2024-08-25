@@ -10,20 +10,16 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/devtools',
     'nuxt-vitest',
-    'nuxt-mongoose',
+    '@prisma/nuxt',
   ],
+  prisma: {
+    installStudio: true,
+  },
   css: [
     '@unocss/reset/tailwind.css',
   ],
   colorMode: {
     classSuffix: '',
-  },
-  mongoose: {
-    options: {
-      user: process.env.MONGODB_USER,
-      pass: process.env.MONGODB_PASS,
-    },
-    devtools: true,
   },
   devtools: {
     timeline: {
