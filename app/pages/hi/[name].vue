@@ -1,11 +1,8 @@
 <script setup lang="ts">
 const route = useRoute()
-const user = useUserStore()
 const name = route.params.name
 
-watchEffect(() => {
-  user.setNewName(route.params.name as string)
-})
+const { data } = await useFetch('/api/user/1')
 
 definePageMeta({
   layout: 'home',
@@ -19,18 +16,16 @@ definePageMeta({
       Hi, {{ name }}
     </p>
 
-    <template v-if="user.otherNames.length">
-      <p text-sm my-4>
-        <span op-50>Also as known as:</span>
-        <ul>
-          <li v-for="otherName in user.otherNames" :key="otherName">
-            <router-link :to="`/hi/${otherName}`" replace>
-              {{ otherName }}
-            </router-link>
-          </li>
-        </ul>
-      </p>
-    </template>
+    <p text-sm my-4>
+      <span op-50>Also as known as:</span>
+      <ul>
+        <li>
+          <router-link :to="`/hi/${data?.user?.name}`" replace>
+            {{ data?.user?.name }}
+          </router-link>
+        </li>
+      </ul>
+    </p>
 
     <LazyCounter />
 
