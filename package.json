@@ -38,6 +38,7 @@
     "happy-dom": "^15.0.0",
     "nuxt-mongoose": "^1.0.6",
     "nuxt-vitest": "^0.11.5",
+    "prisma": "^5.18.0",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
   }
