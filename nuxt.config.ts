@@ -10,11 +10,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/devtools',
     'nuxt-vitest',
-    '@prisma/nuxt',
   ],
-  prisma: {
-    installStudio: true,
-  },
   css: [
     '@unocss/reset/tailwind.css',
   ],
