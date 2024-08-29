@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/devtools',
     'nuxt-vitest',
+    'nuxt-module-chrome-devtools',
   ],
   css: [
     '@unocss/reset/tailwind.css',
