@@ -13,7 +13,6 @@
     "test": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "postinstall": "nuxi prepare",
     "generate": "nuxi generate",
     "release": "bumpp package.json --commit --push --tag"
   },
