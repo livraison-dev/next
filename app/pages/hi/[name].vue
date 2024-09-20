@@ -19,8 +19,8 @@ definePageMeta({
     <p text-sm my-4>
       <span op-50>Also as known as:</span>
       <br>
-      <router-link :to="`/hi/${data?.user[0]?.name}`" replace>
-        {{ data?.user[0]?.name }}
+      <router-link v-for="user in data?.user" :key="user.id" :to="`/hi/${user.name}`" replace>
+        {{ user.name }}
       </router-link>
     </p>
 
