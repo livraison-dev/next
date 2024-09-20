@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     db: {
-      url: process.env.DATABASE_URL,
+      url: import.meta.env.DATABASE_URL,
       dir: './server/db',
     },
   },
