@@ -1,9 +1,8 @@
 import { User } from '~~/server/database/schema/user'
-import { useDb } from '~~/server/utils/db'
 import { eq } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
-  const id = Number.parseInt(event.context.params.id) as number
+  const id = Number(getRouterParam(event, 'id'))
   if (!Number.isInteger(id)) {
     throw createError({
       statusCode: 400,
