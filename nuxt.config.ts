@@ -10,12 +10,28 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/devtools',
     'nuxt-vitest',
+    '@nuxt/fonts',
   ],
   css: [
     '@unocss/reset/tailwind.css',
   ],
   colorMode: {
     classSuffix: '',
+  },
+  fonts: {
+    defaults: {
+      weights: [400],
+      styles: ['normal', 'italic'],
+      subsets: [
+        'cyrillic-ext',
+        'cyrillic',
+        'greek-ext',
+        'greek',
+        'vietnamese',
+        'latin-ext',
+        'latin',
+      ],
+    },
   },
   devtools: {
     timeline: {
