@@ -18,13 +18,10 @@ definePageMeta({
 
     <p text-sm my-4>
       <span op-50>Also as known as:</span>
-      <ul>
-        <li>
-          <router-link :to="`/hi/${data?.user?.name}`" replace>
-            {{ data?.user?.name }}
-          </router-link>
-        </li>
-      </ul>
+      <br>
+      <router-link v-for="user in data?.user" :key="user.id" :to="`/hi/${user.name}`" replace>
+        {{ user.name }}
+      </router-link>
     </p>
 
     <LazyCounter />

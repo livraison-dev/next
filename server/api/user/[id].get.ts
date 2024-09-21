@@ -1,16 +1,16 @@
-import prisma from '~~/lib/prisma'
+import { User } from '~~/server/database/schema/user'
+import { eq } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
-  const id = Number.parseInt(event.context.params.id) as number
+  const id = Number(getRouterParam(event, 'id'))
   if (!Number.isInteger(id)) {
     throw createError({
       statusCode: 400,
       statusMessage: 'ID should be an integer',
     })
   }
-  const user = await prisma.user.findUnique({
-    where: { id },
-  })
+  const db = useDb()
+  const user = await db.select().from(User).where(eq(User.id, id))
   return {
     user,
   }
