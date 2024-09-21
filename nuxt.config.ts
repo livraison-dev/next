@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: '2024-09-21',
   future: {
     compatibilityVersion: 4,
   },
@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/devtools',
     'nuxt-vitest',
-    'nuxt-module-chrome-devtools',
   ],
   css: [
     '@unocss/reset/tailwind.css',
