@@ -7,7 +7,7 @@
     gap-3
   >
     <NuxtLink i-carbon-home to="/" />
-    <a i-carbon-logo-github href="https://github.com/elonehoo/starter-nuxt" target="_blank" />
+    <a i-carbon-logo-github href="https://github.com/livraison-dev/next" target="_blank" />
     <LazyToggleDarkToggle />
   </div>
 </template>
