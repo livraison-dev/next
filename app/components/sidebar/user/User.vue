@@ -3,7 +3,7 @@ import { Image, ImageFallback, ImageRoot } from '@destyler/image'
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-2 w-10/12 p-1 m-auto [margin:0 auto]">
     <ImageRoot
       relative="~"
       flex="~"

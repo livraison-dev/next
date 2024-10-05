@@ -13,7 +13,19 @@ defineOptions({
 
 const sidebar = useSidebarStore()
 
-const { panSize, show } = storeToRefs(sidebar)
+const { show } = storeToRefs(sidebar)
+
+const checkScreenSize = () => {
+  if (window.innerWidth < 1280) {
+    show.value = false
+  }
+  else {
+    show.value = true
+  }
+}
+onMounted(() => {
+  window.addEventListener('resize', checkScreenSize)
+})
 </script>
 
 <template>
@@ -27,16 +39,17 @@ const { panSize, show } = storeToRefs(sidebar)
       id="splitter-group-1"
       direction="horizontal"
     >
-      <SplitterPanel
-        id="splitter-group-1-panel-1"
-        :max-size="15"
-        flex="~"
-        items="left"
-        justify="left
-        "
-      >
-        <Sidebar />
-      </SplitterPanel>
+      <TransitionGroup name="list">
+        <SplitterPanel
+          v-if="show"
+          id="splitter-group-1-panel-1"
+          flex="~"
+          items="left"
+          justify="left"
+        >
+          <Sidebar />
+        </SplitterPanel>
+      </TransitionGroup>
       <SplitterResizeHandle
         id="splitter-group-1-resize-handle-1"
         w="px"
@@ -44,27 +57,25 @@ const { panSize, show } = storeToRefs(sidebar)
       />
       <SplitterPanel
         id="splitter-group-1-panel-2"
-        :min-size="20"
+        :max-size="show ? 85 : 100"
+        :min-size="show ? 83 : 100"
       >
         <SplitterGroup
           id="splitter-group-2"
-          :size="show ? 80 : 100" :min-size="show ? 70 : 100" :max-size="show ? 85 : 100"
           direction="vertical"
         >
           <SplitterPanel
             id="splitter-group-2-panel-1"
-            :max-size="16"
             flex="~"
             items="center"
             justify="center"
-            bg="pink"
           >
             <Header />
           </SplitterPanel>
           <SplitterResizeHandle
             id="splitter-group-2-resize-handle-1"
             h="px"
-            bg="border"
+            bg="#696969"
           />
           <SplitterPanel
             id="splitter-group-2-panel-2"
@@ -82,3 +93,23 @@ const { panSize, show } = storeToRefs(sidebar)
     </SplitterGroup>
   </SplitterRoot>
 </template>
+
+<style lang="css" scoped>
+.list-move, /* 对移动中的元素应用的过渡 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list-leave-active {
+  position: absolute;
+}
+</style>
