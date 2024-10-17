@@ -10,11 +10,14 @@ const reqList = [
 </script>
 
 <template>
-  <div v-for="item in reqList" :key="item.req" class="float-left w-full flex justify-start items-center">
-    <div class="float-left w-full flex justify-start items-center">
-      <span>{{ item.req }}</span>
-      <span class="text-gray-400">{{ item.url }}</span>
-      <Icon name="carbon:close" class="text-5 mt-0 icon-hover" />
+  <div v-for="item in reqList" :key="item.req">
+    <div class="w-30 h-5 overflow-hidden float-left flex-auto">
+      <div class="w-25 overflow-hidden text-ellipsis">
+        <span>{{ item.req }}</span>
+        <span class="text-gray-400">{{ item.url }}</span>
+      </div>
+      <Icon name="carbon:close" class="text-5 float-left" />
     </div>
   </div>
+  +
 </template>

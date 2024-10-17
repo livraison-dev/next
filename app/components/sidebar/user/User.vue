@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import { Image, ImageFallback, ImageRoot } from '@destyler/image'
+import { useSidebarStore } from '~/store/sidebar'
+
+const sidebar = useSidebarStore()
+const { show } = storeToRefs(sidebar)
 </script>
 
 <template>
-  <div class="flex items-center gap-2 w-10/12 p-1 m-auto [margin:0 auto]">
+  <div class="flex items-center gap-2 m-auto [margin:0 auto]">
     <ImageRoot
       relative="~"
       flex="~"
-      h="10"
-      w="10"
+      h="8"
+      w="8"
       shrink="0"
       overflow="hidden"
       rounded="full"
+      class="m-3"
     >
       <Image
         aspect="square"
@@ -31,6 +36,8 @@ import { Image, ImageFallback, ImageRoot } from '@destyler/image'
         DE
       </ImageFallback>
     </ImageRoot>
-    User Name
+    <div v-if="show">
+      User Name
+    </div>
   </div>
 </template>
