@@ -2,154 +2,142 @@
 import { ref } from 'vue'
 import { Icon } from '@destyler/icon'
 import {
-  ComboboxAnchor,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxGroup,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxItemIndicator,
-  ComboboxLabel,
-  ComboboxRoot,
-  ComboboxSeparator,
-  ComboboxTrigger,
-  ComboboxViewport,
-} from '@destyler/combobox'
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectItemIndicator,
+  SelectItemText,
+  SelectLabel,
+  SelectPortal,
+  SelectRoot,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectTrigger,
+  SelectValue,
+  SelectViewport,
+} from '@destyler/select'
 
 const value = ref('')
 
 const options = ref([
-  {
-    label: 'frontend',
-    items: ['vue', 'nuxt', 'react', 'next', 'svelte', 'svelte kit', 'angular'],
-
-  },
-  {
-    label: 'backend',
-    items: ['nitro', 'express', 'hono', 'koa', 'adonis'],
-  },
+  { label: 'GET', value: 'get' },
+  { label: 'POST', value: 'post' },
+  { label: 'PUT', value: 'put' },
+  { label: 'DELETE', value: 'delete' },
 ])
 </script>
 
 <template>
-  <ComboboxRoot
-    v-model="value"
-  >
-    <ComboboxAnchor
+  <SelectRoot v-model="value">
+    <SelectTrigger
       flex="~"
       h="9"
-      w="40"
+      w="180px"
+      items="center"
+      justify="between"
+      whitespace="nowrap"
       rounded="md"
-      border="~ input file:0"
-      bg="transparent file:transparent"
-      p="x-1"
-      text="sm file:sm placeholder:muted-foreground"
+      border="~ input"
+      bg="transparent"
+      p="x-3 y-2"
+      text="sm placeholder:muted-foreground dark dark:light"
       shadow="sm"
-      transition="colors"
-      font="file:medium"
-      focus-visible="outline-none ring-1 ring-ring"
-      disabled="cursor-not-allowed op-50"
+      ring-offset="background"
+      outline="focus:none"
+      ring="focus:1"
+      cursor="disabled:not-allowed"
+      op="disabled:50"
+      line="[&>span]:clamp-1"
     >
-      <ComboboxInput
-        bg="transparent"
-        text="primary"
-        w="full"
-        outline="none"
-        m="l-2"
-        placeholder="Placeholder..."
-      />
-      <ComboboxTrigger rotate="[&[data-state=open]>svg]:180">
-        <Icon
-          w="4"
-          h="4"
-          text="primary/80"
-          transition="transform"
-          duration="150"
-          name="carbon:chevron-down"
-        />
-      </ComboboxTrigger>
-    </ComboboxAnchor>
-    <ComboboxContent
-      absolute="~"
-      z="10"
-      m="t-1"
-      w="full"
-      rounded="md"
-      border="~"
-      bg="popover"
-      p="1"
-      text="popover-foreground"
-      shadow="md"
-      outline="none"
-      class="
-      data-[state=open]:animate-in
-      data-[state=closed]:animate-out
-      data-[state=closed]:fade-out-0
-      data-[state=open]:fade-in-0
-      data-[state=closed]:zoom-out-95
-      data-[state=open]:zoom-in-95
-      data-[side=bottom]:slide-in-from-top-2
-      data-[side=left]:slide-in-from-right-2
-      data-[side=right]:slide-in-from-left-2
-      data-[side=top]:slide-in-from-bottom-2
-      "
-    >
-      <ComboboxViewport>
-        <ComboboxEmpty
-          p="y-3"
-          text="center sm"
-        />
-        <template
-          v-for="(option, index) of options"
-          :key="option.label"
+      <SelectValue />
+      <Icon name="carbon:chevron-sort" class="h-4 w-4 opacity-50" />
+    </SelectTrigger>
+    <SelectPortal>
+      <SelectContent
+        relative="~"
+        z="50"
+        max-h="96"
+        min-w="8rem"
+        overflow="hidden"
+        rounded="md"
+        border="~"
+        bg="popover"
+        text="popover-foreground"
+        shadow="md"
+        class="
+        data-[state=open]:animate-in data-[state=closed]:animate-out
+        data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+        data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
+        data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2
+        data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2
+        data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1
+        data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1
+        "
+        position="popper"
+      >
+        <SelectScrollUpButton
+          flex="~"
+          cursor="default"
+          items="center"
+          justify="center"
+          p="y-1"
         >
-          <ComboboxGroup
-            overflow="hidden"
-            p="1"
-          >
-            <ComboboxLabel
-              overflow="hidden"
-              text="foreground/50"
+          <Icon name="carbon:chevron-up" h="4" w="4" />
+        </SelectScrollUpButton>
+        <SelectViewport
+          p="1"
+          h="[var(--destyler-select-trigger-height)]"
+          w="full"
+          min-w="[var(--destyler-select-trigger-width)]"
+        >
+          <SelectGroup>
+            <SelectItem
+              v-for="option in options"
+              :key="option.value"
+              :value="option.value"
+              relative="~"
               flex="~"
-              justify="start"
-              items="center"
               w="full"
-              p="x-2 y-1"
-            >
-              {{ option.label }}
-            </ComboboxLabel>
-            <ComboboxItem
-              v-for="item in option.items"
-              :key="item"
-              :value="item"
-              overflow="hidden"
-              text="foreground"
-              flex="~"
-              justify="start"
+              cursor="pointer"
+              select="none"
               items="center"
-              w="full"
-              p="x-2 y-1"
-              bg="data-[highlighted]:accent"
-              rounded="data-[highlighted]:~"
+              rounded="sm focus:accent-foreground"
+              p="y-1.5 l-2 r-8"
+              text="sm"
+              outline="none"
+              bg="focus:accent"
+              pointer-events="data-[disabled]:none"
+              op="data-[disabled]:50"
             >
-              <span>{{ item }}</span>
-              <ComboboxItemIndicator
-                m="l-auto"
-                h="4"
-                w="4"
+              <SelectItemText>
+                {{ option.label }}
+              </SelectItemText>
+              <span
+                absolute="~"
+                right="2"
+                flex="~"
+                h="3.5"
+                w="3.5"
+                items="center"
+                justify="center"
               >
-                <Icon name="carbon:checkmark" />
-              </ComboboxItemIndicator>
-            </ComboboxItem>
-          </ComboboxGroup>
-          <ComboboxSeparator
-            v-show="index !== options.length - 1"
-            h="0.25"
-            bg="foreground/60"
-            m="1"
-          />
-        </template>
-      </ComboboxViewport>
-    </ComboboxContent>
-  </ComboboxRoot>
+                <SelectItemIndicator>
+                  <Icon name="carbon:checkmark" h="4" w="4" />
+                </SelectItemIndicator>
+              </span>
+            </SelectItem>
+          </SelectGroup>
+        </SelectViewport>
+        <SelectScrollDownButton
+          flex="~"
+          cursor="default"
+          items="center"
+          justify="center"
+          p="y-1"
+        >
+          <Icon name="carbon:chevron-down" h="4" w="4" />
+        </SelectScrollDownButton>
+      </SelectContent>
+    </SelectPortal>
+  </SelectRoot>
 </template>

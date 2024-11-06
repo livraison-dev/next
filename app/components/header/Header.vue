@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
     <LazyHeaderRequestCard />
-    <LazyHeaderReqUrl />
+    <LazyHeaderReqUrl class="mt-10" />
   </div>
 </template>
